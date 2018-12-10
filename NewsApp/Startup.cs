@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NewsApp.Models;
+using NewsApp.Models.DAL;
+using NewsApp.Util;
 
 namespace NewsApp
 {
@@ -27,10 +29,12 @@ namespace NewsApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddSingleton<IRandom, RandomUtil>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<NewsDbContext>(options =>
                  options.UseSqlite("Data Source=NewsApp.db"));
+            services.AddTransient<INewsRepository, EFSQLiteNewsRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
