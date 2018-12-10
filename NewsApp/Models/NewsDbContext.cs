@@ -10,6 +10,8 @@ namespace NewsApp.Models
     {
         public DbSet<News> News { get; set; }
 
+        public NewsDbContext(DbContextOptions options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<News>()
