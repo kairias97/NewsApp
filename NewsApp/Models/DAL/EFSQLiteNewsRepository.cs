@@ -39,8 +39,8 @@ namespace NewsApp.Models.DAL
         {
             Func<News, bool> filter = news =>
                 (news.PublishedDate >= startDate 
-                && news.PublishedDate <= endDate 
-                && news.Title.Contains(title, StringComparison.InvariantCultureIgnoreCase));
+                && news.PublishedDate <= endDate
+                && (String.IsNullOrEmpty(title) || news.Title.Contains(title, StringComparison.InvariantCultureIgnoreCase)));
             return _context.News
                 .Where(filter);
         }
