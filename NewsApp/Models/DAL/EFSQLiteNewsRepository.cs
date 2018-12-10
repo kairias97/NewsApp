@@ -11,7 +11,7 @@ namespace NewsApp.Models.DAL
         private readonly NewsDbContext _context;
         private readonly IRandom _random;
 
-        EFSQLiteNewsRepository(NewsDbContext context,
+        public EFSQLiteNewsRepository(NewsDbContext context,
             IRandom randomGenerator)
         {
             this._context = context;
@@ -20,11 +20,12 @@ namespace NewsApp.Models.DAL
 
         public IEnumerable<News> GetFeatured()
         {
-            int newsCount = _context.News.Count();
+            //int newsCount = _context.News.Count();
             int featuredCount = 3;
-            int skippableCount = newsCount - featuredCount;
-            int rowsToSkip = _random.GetNextIntInclusive(0, skippableCount);
-            return _context.News.Skip(rowsToSkip).Take(featuredCount);
+            //int skippableCount = newsCount - featuredCount;
+            //int rowsToSkip = _random.GetNextIntInclusive(0, skippableCount);
+            return _context.News.OrderBy(n => Guid.NewGuid()).Take(featuredCount);
+            //return _context.News.Skip(rowsToSkip).Take(featuredCount);
         }
 
         public IEnumerable<News> GetRecents(int limit)

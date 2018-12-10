@@ -30,7 +30,10 @@ namespace NewsApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IRandom, RandomUtil>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(options => {
+                   
+                });
             services.AddDbContext<NewsDbContext>(options =>
                  options.UseSqlite("Data Source=NewsApp.db"));
             services.AddTransient<INewsRepository, EFSQLiteNewsRepository>();

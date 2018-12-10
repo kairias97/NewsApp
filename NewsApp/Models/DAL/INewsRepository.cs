@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace NewsApp.Models.DAL
 {
-    interface INewsRepository
+    public interface INewsRepository
     {
         IEnumerable<News> GetFeatured();
         IEnumerable<News> GetRecents(int limit);
