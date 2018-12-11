@@ -48,9 +48,41 @@ app.controller('HomeController', ['$scope', 'newsApi', function ($scope, newsApi
                 $scope.error = false;
             }).catch(function (e) {
                 $scope.error = true;
-            })
+            });
     }
     getFeaturedNews();
+}]);
+
+app.controller('ExploreController', ['$scope', 'newsApi', function ($scope, newsApi) {
+    $scope.news = [];
+    $scope.error = false;
+    $scope.title = '';
+    $scope.startDate = '';
+    $scope.endDate = '';
+
+
+    function getRecentNews() {
+        newsApi.getRecentNews()
+            .then(function (news) {
+                $scope.news = news;
+                $scope.error = false;
+            }).catch(function (e) {
+                $scope.error = true;
+            });
+    }
+
+    function searchNews() {
+        let { title, startDate, endDate } = $scope;
+        newsApi.searchNews(title, startDate, endDate)
+            .then(function (news) {
+                $scope.news = news;
+                $scope.error = false;
+            }).catch(function (e) {
+                $scope.error = true;
+            })
+    }
+
+    getRecentNews();
 }]);
 
 
