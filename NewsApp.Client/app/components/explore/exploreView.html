@@ -1,0 +1,40 @@
+﻿<div ng-controller="ExploreController">
+    <h3>Explore News</h3>
+    <div class="alert alert-danger" role="alert" ng-if="error">
+        An error ocurred while fetching the target news from the server
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" ng-model="title" placeholder="Title">
+                </div>
+                <div class="col-sm-3">
+                    <input type="date" class="form-control" ng-model="startDate" placeholder="Start Date">
+                </div>
+                <div class="col-sm-3">
+                    <input type="date" class="form-control" ng-model="endDate" placeholder="End Date">
+                </div>
+                <div class="col-sm-3">
+                    <button 
+                            type="button" 
+                            class="btn btn-primary" 
+                            ng-click="searchNews()" ng-disabled="startDate === '' || endDate === '' || startDate === null || endDate === null">Search</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row" ng-repeat="n in news" style="margin-top:10px;">
+        <div class="col-8">
+            <div class="card" style="margin-bottom:20px;max-width:600px">
+                <img class="card-img-top" src="{{n.imageURL}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{n.title}}</h5>
+                    <p class="card-text" ng-bind-html="n.content"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
