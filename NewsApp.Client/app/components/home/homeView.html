@@ -1,4 +1,7 @@
 ﻿<div ng-controller="HomeController">
+    <div class="alert alert-danger" role="alert" ng-if="error">
+        An error ocurred while fetching news from the server
+    </div>
     <div class="row" ng-repeat="n in news" style="margin-top:10px;">
         <div class="col-8">
             <div class="card" style="margin-bottom:20px;max-width:600px">
