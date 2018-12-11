@@ -1,6 +1,6 @@
 # News App
 
-Hi! This project consists in a client side app built using Angular.JS and connected to a backend API built with C# and ASP.NET Core, EF Code First and SQLite.
+Hi! This project consists in a client side app built using Angular.JS version 1.6.9 and connected to a backend API built with C# and ASP.NET Core, EF Code First and SQLite.
 
 
 # Prerequisites
