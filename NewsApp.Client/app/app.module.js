@@ -27,6 +27,13 @@ app.factory('newsApi', ['$http', function ($http) {
             });
     };
 
+    service.searchNews = function (title, startDate, endDate) {
+        return $http.get(encodeURI(`${this.hostUrl}api/news/recent?title=${title}&startDate=${startDate}&endDate=${endDate}`))
+            .then(function (response) {
+                return response.data;
+            });
+    };
+
     return service;
 }]);
 
