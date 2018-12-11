@@ -1,0 +1,13 @@
+﻿<div ng-controller="HomeController">
+    <div class="row" ng-repeat="n in news" style="margin-top:10px;">
+        <div class="col-8">
+            <div class="card" style="margin-bottom:20px;max-width:600px">
+                <img class="card-img-top" src="{{n.imageURL}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{n.title}}</h5>
+                    <p class="card-text" ng-bind-html="n.content"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
