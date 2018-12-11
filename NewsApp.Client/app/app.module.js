@@ -1,7 +1,8 @@
 ﻿'use strict';
 const apiHost = 'http://localhost:47441/';
 var app = angular.module('newsApp', [
-    'ngRoute'
+    'ngRoute',
+    'ngSanitize'
 ]);
 app.config(['$locationProvider', function ($locationProvider) {
     $locationProvider.html5Mode(true);
@@ -25,7 +26,6 @@ app.factory('newsApi', ['$http', function ($http) {
 app.controller('HomeController', ['$scope', 'newsApi', function ($scope, newsApi) {
     $scope.news = [];
     $scope.error = false;
-    
     function getFeaturedNews() {
         newsApi.getFeaturedNews()
             .then(function (news) {
