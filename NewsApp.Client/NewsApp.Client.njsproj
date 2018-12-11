@@ -32,6 +32,9 @@
     <Compile Include="app\app.module.js" />
     <Compile Include="app\app.routes.js" />
     <Compile Include="server.js" />
+    <Content Include="app\components\explore\exploreView.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="app\components\home\homeView.html" />
     <Content Include="package.json" />
     <Content Include="public\index.html">
@@ -43,6 +46,7 @@
     <Folder Include="app\" />
     <Folder Include="app\components\" />
     <Folder Include="app\components\home\" />
+    <Folder Include="app\components\explore\" />
     <Folder Include="public\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
