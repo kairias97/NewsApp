@@ -5,5 +5,8 @@
   "main": "server.js",
   "author": {
     "name": "kevin"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
