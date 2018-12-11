@@ -10,6 +10,7 @@ app.config(['$locationProvider', function ($locationProvider) {
 }]);
 
 //Custom services setup
+
 app.factory('newsApi', ['$http', function ($http) {
     let service = {};
     service.hostUrl = apiHost;
@@ -32,6 +33,9 @@ app.factory('newsApi', ['$http', function ($http) {
             .then(function (response) {
                 return response.data;
             });
+    };
+    service.formatDateForServer = function (date) {
+        return date.toISOString().substring(0, 10);
     };
 
     return service;
@@ -73,6 +77,8 @@ app.controller('ExploreController', ['$scope', 'newsApi', function ($scope, news
 
     $scope.searchNews = function () {
         let { title, startDate, endDate } = $scope;
+        startDate = newsApi.formatDateForServer(startDate);
+        endDate = newsApi.formatDateForServer(endDate);
         newsApi.searchNews(title, startDate, endDate)
             .then(function (news) {
                 $scope.news = news;
