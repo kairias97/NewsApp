@@ -57,7 +57,7 @@ namespace NewsApp.Models
                      {
                          Title = "Wikimedia Commons media of the day for December 3",
                          PublishedDate = DateTime.UtcNow.Date.AddMonths(-1),
-                         ImageURL = "",
+                         ImageURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Robinet_chauffeur_myope_%281914%29.webm/300px-seek%3D1-Robinet_chauffeur_myope_%281914%29.webm.jpg",
                          Content = "Robinet chauffeur miope is a 1914 Italian silent film by <a href='https://en.wikipedia.org/wiki/Marcel_Perez'>Marcel Perez</a>. "
 
                      },
