@@ -10,6 +10,7 @@ app.config(['$locationProvider', function ($locationProvider) {
 }]);
 
 //Custom services setup
+
 app.factory('newsApi', ['$http', function ($http) {
     let service = {};
     service.hostUrl = apiHost;
@@ -19,6 +20,24 @@ app.factory('newsApi', ['$http', function ($http) {
                 return response.data;
             });
     };
+
+    service.getRecentNews = function () {
+        return $http.get(`${this.hostUrl}api/news/recent`)
+            .then(function (response) {
+                return response.data;
+            });
+    };
+
+    service.searchNews = function (title, startDate, endDate) {
+        return $http.get(encodeURI(`${this.hostUrl}api/news/search?title=${title}&startDate=${startDate}&endDate=${endDate}`))
+            .then(function (response) {
+                return response.data;
+            });
+    };
+    service.formatDateForServer = function (date) {
+        return date.toISOString().substring(0, 10);
+    };
+
     return service;
 }]);
 
@@ -32,10 +51,44 @@ app.controller('HomeController', ['$scope', 'newsApi', function ($scope, newsApi
                 $scope.news = news;
                 $scope.error = false;
             }).catch(function (e) {
-                $scope.error = false;
-            })
+                $scope.error = true;
+            });
     }
     getFeaturedNews();
+}]);
+
+app.controller('ExploreController', ['$scope', 'newsApi', function ($scope, newsApi) {
+    $scope.news = [];
+    $scope.error = false;
+    $scope.title = '';
+    $scope.startDate = '';
+    $scope.endDate = '';
+
+
+    function getRecentNews() {
+        newsApi.getRecentNews()
+            .then(function (news) {
+                $scope.news = news;
+                $scope.error = false;
+            }).catch(function (e) {
+                $scope.error = true;
+            });
+    }
+
+    $scope.searchNews = function () {
+        let { title, startDate, endDate } = $scope;
+        startDate = newsApi.formatDateForServer(startDate);
+        endDate = newsApi.formatDateForServer(endDate);
+        newsApi.searchNews(title, startDate, endDate)
+            .then(function (news) {
+                $scope.news = news;
+                $scope.error = false;
+            }).catch(function (e) {
+                $scope.error = true;
+            })
+    }
+
+    getRecentNews();
 }]);
 
 
