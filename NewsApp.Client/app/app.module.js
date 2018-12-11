@@ -47,7 +47,7 @@ app.controller('HomeController', ['$scope', 'newsApi', function ($scope, newsApi
                 $scope.news = news;
                 $scope.error = false;
             }).catch(function (e) {
-                $scope.error = false;
+                $scope.error = true;
             })
     }
     getFeaturedNews();
