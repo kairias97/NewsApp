@@ -8,23 +8,35 @@ app.config(['$locationProvider', function ($locationProvider) {
     $locationProvider.hashPrefix('');
 }]);
 
-app.controller('HomeController', function ($scope, $http) {
+//Custom services setup
+app.factory('newsApi', ['$http', function ($http) {
+    let service = {};
+    service.hostUrl = apiHost;
+    service.getFeaturedNews = function () {
+        return $http.get(`${this.hostUrl}api/news/featured`)
+            .then(function (response) {
+                return response.data;
+            });
+    };
+    return service;
+}]);
+
+//Controllers setup
+app.controller('HomeController', ['$scope', 'newsApi', function ($scope, newsApi) {
     $scope.news = [];
     $scope.error = false;
     
     function getFeaturedNews() {
-        
-        $http.get(`${apiHost}api/news/featured`).then(function (response) {
-            $scope.news = response.data;
-
-            $scope.fetched = true;
-        }).catch(function (error) {
-            $scope.news = [];
-            $scope.error = true;
-        })
+        newsApi.getFeaturedNews()
+            .then(function (news) {
+                $scope.news = news;
+                $scope.error = false;
+            }).catch(function (e) {
+                $scope.error = false;
+            })
     }
     getFeaturedNews();
-});
+}]);
 
 
 
