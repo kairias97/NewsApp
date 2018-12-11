@@ -19,6 +19,14 @@ app.factory('newsApi', ['$http', function ($http) {
                 return response.data;
             });
     };
+
+    service.getRecentNews = function () {
+        return $http.get(`${this.hostUrl}api/news/recent`)
+            .then(function (response) {
+                return response.data;
+            });
+    };
+
     return service;
 }]);
 
