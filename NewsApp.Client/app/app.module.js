@@ -28,7 +28,7 @@ app.factory('newsApi', ['$http', function ($http) {
     };
 
     service.searchNews = function (title, startDate, endDate) {
-        return $http.get(encodeURI(`${this.hostUrl}api/news/recent?title=${title}&startDate=${startDate}&endDate=${endDate}`))
+        return $http.get(encodeURI(`${this.hostUrl}api/news/search?title=${title}&startDate=${startDate}&endDate=${endDate}`))
             .then(function (response) {
                 return response.data;
             });
@@ -71,7 +71,7 @@ app.controller('ExploreController', ['$scope', 'newsApi', function ($scope, news
             });
     }
 
-    function searchNews() {
+    $scope.searchNews = function () {
         let { title, startDate, endDate } = $scope;
         newsApi.searchNews(title, startDate, endDate)
             .then(function (news) {
