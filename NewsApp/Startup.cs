@@ -37,7 +37,7 @@ namespace NewsApp
             services.AddDbContext<NewsDbContext>(options =>
                  options.UseSqlite("Data Source=NewsApp.db"));
             services.AddTransient<INewsRepository, EFSQLiteNewsRepository>();
-            
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +47,8 @@ namespace NewsApp
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors( builder => builder.AllowAnyOrigin());
+            
             app.UseMvc();
         }
     }
